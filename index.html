@@ -1,97 +1,59 @@
-<!--Aletta Ren, Sep5 2021-->
-<!doctype html>
-<html lang="en">
-<head>
-<title>Emily Dickinson</title>
-<meta charset="utf-8">
-</head>
-<style>
-h1 {
-  font-family: Copperplate, Papyrus, fantasy;
-  color: #6495ED;
-}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Aincraft</title>
+    <meta name="description" content="Aincraft">
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-teleport-controls@0.2.0/dist/aframe-teleport-controls.min.js"></script>
+    <script src="https://unpkg.com/aframe-controller-cursor-component@0.2.2/dist/aframe-controller-cursor-component.min.js"></script>
+    <script src="https://rawgit.com/dmarcos/aframe-motion-capture/master/dist/aframe-motion-capture.min.js"></script>
+    <script src="components/intersection-spawn.js"></script>
+    <script src="components/random-color.js"></script>
+    <script src="components/snap.js"></script>
+  </head>
+  <body>
+    <a-scene avatar-recorder>
+      <a-assets>
+        <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
+        <img id="skyTexture" src="https://cdn.aframe.io/a-painter/images/sky.jpg">
+        <a-mixin id="voxel"
+           geometry="primitive: box; height: 0.5; width: 0.5; depth: 0.5"
+           material="shader: standard"
+           random-color
+           snap="offset: 0.25 0.25 0.25; snap: 0.5 0.5 0.5"
+        ></a-mixin>
 
-h2 {
-  font-family: Tahoma, sans-serif;
-  color: #5F9EA0;
-  font-size: 16pt;
-  margin-left: 30px;
-}
+                <a-mixin id="voxel"
+           geometry="primitive: box; height: 0.5; width: 0.5; depth: 0.5"
+           material="shader: standard"
+           random-color
+           snap="offset: 0.25 0.25 0.25; snap: 0.5 0.5 0.5"
+        ></a-mixin>
+        
+      </a-assets>
 
-h3 {
-  font-family: "Courier New", Courier, monospace;
-}
+      <a-sky id="bg" radius="30" src="#skyTexture" theta-length="90"></a-sky>
 
-h4 {
-  font-family: Tahoma, sans-serif;
-  color: #F08080;
-  font-size: 16pt;
-  margin-left: 30px;
-}
+      <a-cylinder id="ground" src="#groundTexture" radius="32" height="0.1"></a-cylinder>
 
-div.a {
-  text-decoration-line: underline;
-  text-decoration-style: solid;
-}
+      <!-- Hands. -->
+      <a-entity id="teleHand"
+        hand-controls="left"
+        teleport-controls="type: parabolic; collisionEntities: [mixin='voxel'], #ground"
+      ></a-entity>
 
-div.d {
-  text-decoration-line: underline;
-  text-decoration-style: wavy;
-  font-size: 20pt;
-  color: #ADD8E6;
-  text-shadow: 2px 1px #8FBC8F;
-}
+      <a-entity id="blockHand"
+        hand-controls="right"
+        controller-cursor
+        intersection-spawn="event: click; mixin: voxel"
+      ></a-entity>
 
-div.e {
-  text-decoration-line: underline;
-  margin-right: 100px;
-}
-
-</style>
-
-<body>
-<h1><div class="e"><p align="right">HOPE IS THE THING WITH FEATHERS</p></h1>
-<h2>Emily Dickinson - 1830-1886</h2><br>
-
-<ol>
-	<li><p style="line-height: 70%">Hope is the thing with feathers</li><ol type="A">
-    <li>That perches in the soul,</li><ol type="a">
-    <li>And sings the tune without the words,</li>
-    <li>And never stops at all, 这一切从未停止过。 この世間一般。</li>
-</ol>
-
-<ul>
-<ol>
-<li><div class="a">And sweetest in the gale is heard;</li></div>
-<li>And sore must be the storm</li> <ol type="A"><ol type="A">
-</ul>
-
-<blockquote>
-<h3><div class="d">That could abash the little bird<br>
-That kept so many warm.</h3></div>
-</blockquote>
-I've heard it in the chillest land,
-And on the <a href="https://poets.org/poem/hope-thing-feathers-254">strangest sea</a>;
-<br>
-<br>Yet, never, in extremity,
-It asked a crumb of me.
-<br>
-<br>
-<a href="www.alettaren.com" target="new"> <img src="https://images.squarespace-cdn.com/content/v1/5c8722cf90f9049cf60fbd33/1657490730976-GL1YCUALWJR3ZIHZLW1J/IMG_7633+%281%29.JPG?format=2500w" alt="サムポル" width="600px" height="900px"> </a>
-<br>
-<br>
-<a href="https://www.youtube.com/watch?v=0WOnozeaxwc">千古笑int</a>
-<br>
-<a href="https://www.youtube.com/watch?v=0WOnozeaxwc" target="new"><h4>千古笑ext</h4></a>
-<br>
-<br>
-<a href="demo1/home.html">About Us</a>
-<br>
-<br>
-<!--This is a comment
-The paragraph below is the about us copy
--->
-<p> This is a paragraph.</p>
-
-</body>
+      <!-- Camera. -->
+      <a-camera>
+        <a-cursor
+          intersection-spawn="event: click; mixin: voxel"
+        ></a-cursor>
+      </a-camera>
+    </a-scene>
+  </body>
 </html>
