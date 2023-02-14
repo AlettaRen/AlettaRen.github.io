@@ -10,8 +10,25 @@
     <script src="components/intersection-spawn.js"></script>
     <script src="components/random-color.js"></script>
     <script src="components/snap.js"></script>
+     <script
+      type="module"
+      src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
+    ></script>
   </head>
-  <body>
+   <body data-new-gr-c-s-check-loaded="14.1000.0" data-gr-ext-installed="https://pachecod.github.io/models/testmodels/gingerbread.usdz">
+    <model-viewer
+      style="width: 100%; height: 100%"
+      src="lama.glb"
+      ar=""
+      ar-modes="webxr scene-viewer quick-look"
+      ar-scale="auto"
+      camera-controls=""
+      alt="3D Model"
+      ios-src="lama.usdz"
+      ar-status="not-presenting"
+    >
+    </model-viewer>
+     
     <a-scene avatar-recorder>
       <a-assets>
         <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
@@ -22,6 +39,7 @@
            random-color
            snap="offset: 0.25 0.25 0.25; snap: 0.5 0.5 0.5"
         ></a-mixin>
+        
 
                 <a-mixin id="voxel"
            geometry="primitive: box; height: 0.5; width: 0.5; depth: 0.5"
